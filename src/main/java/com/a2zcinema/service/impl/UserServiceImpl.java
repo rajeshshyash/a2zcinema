@@ -28,16 +28,16 @@ public class UserServiceImpl implements UserService {
 		return userDaoTO.updateUser(user);
 	}
 
-	public void deleteUser(long id) {
-		userDaoTO.deleteUser(id);
+	public void deleteUser(long userId) {
+		userDaoTO.deleteUser(userId);
 	}
 
 	public List<User> getAllUsers() {
 		return userDaoTO.getAllUsers();
 	}
 
-	public User getUser(long id) {
-		return userDaoTO.getUser(id);
+	public User getUser(long userId) {
+		return userDaoTO.getUser(userId);
 	}
 
 	public List<User> getAllUsers(String userName) {

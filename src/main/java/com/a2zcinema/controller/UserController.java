@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	private UserService userServiceTO;
 	
-    @RequestMapping("createUser")
+    @RequestMapping("userRegister")
     public ModelAndView createEmployee(@ModelAttribute User user) {
         return new ModelAndView("register");
     }
@@ -32,7 +32,7 @@ public class UserController {
     
     @RequestMapping(value="/saveUser", method = RequestMethod.POST)
     public ModelAndView saveUser(@ModelAttribute User user) {
-        if(user.getId() == 0){ 
+        if(user.getUserId() == 0){ 
         	userServiceTO.createUser(user);
         } else {
         	userServiceTO.updateUser(user);

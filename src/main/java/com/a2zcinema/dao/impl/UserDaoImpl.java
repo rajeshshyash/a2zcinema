@@ -29,9 +29,9 @@ public class UserDaoImpl implements UserDao {
 		return hibernateUtilTo.update(user);
 	}
 
-	public void deleteUser(long id) {
+	public void deleteUser(long userId) {
 		User user = new User();
-		user.setId(id);
+		user.setUserId(userId);
 		this.hibernateUtilTo.delete(user);
 	}
 
@@ -39,24 +39,28 @@ public class UserDaoImpl implements UserDao {
 		return hibernateUtilTo.fetchAll(User.class);
 	}
 	
-	public User getUser(long id) {
-		return hibernateUtilTo.fetchById(id, User.class);
+	public User getUser(long userId) {
+		return hibernateUtilTo.fetchById(userId, User.class);
 	}
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers(String userName) {
-		String query = "SELECT u.* FROM users u WHERE u.name like '%"+ userName +"%'";
+		String query = "SELECT u.* FROM users u WHERE u.username like '%"+ userName +"%'";
 		List<Object[]> userObjects = (List<Object[]>) this.hibernateUtilTo.fetchAll(query);
 		List<User> users = new ArrayList<User>();
 		for(Object[] userObject: userObjects) {
 			User user = new User();
-			long id = ((BigInteger) userObject[0]).longValue();			
-			int age =  (Integer) userObject[1];
-			String name = (String) userObject[2];
-			float salary = (Float) userObject[3];
-			user.setId(id);
-			user.setName(name);
-			user.setAge(age);
-			user.setSalary(salary);
+			long userid = ((BigInteger) userObject[0]).longValue();			
+			String useName = (String) userObject[1];
+			String firstName = (String) userObject[2];
+			String lastName = (String) userObject[3];
+			String email = (String) userObject[4];
+			long mob = ((BigInteger) userObject[5]).longValue();
+			user.setUserId(userid);
+			user.setUserName(useName);
+			user.setFirstName(firstName);
+			user.setLastName(lastName);
+			user.setEmailId(email);
+			user.setMobile(mob);
 			users.add(user);
 		}
 		System.out.println(users);
